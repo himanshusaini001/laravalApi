@@ -89,7 +89,14 @@ class ApiController extends Controller
             ], 500);
         }
     }
-
+    public function single_data(Request $request){
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'User logged Out',
+            'data'=> [],
+        ], 200);
+    }
     public function logout(Request $request){
         $request->user()->currentAccessToken()->delete();
         return response()->json([
