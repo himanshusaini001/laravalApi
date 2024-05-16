@@ -90,14 +90,14 @@ class ApiController extends Controller
         }
     }
 
-    public function logout(){
-        dd(auth()->user());
-        auth()->user()->token()->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'User logged Out',
-            'data'=> [],
-        ], 200);
-    }
+    // public function logout(){
+    //     dd(auth()->user());
+    //     auth()->user()->token()->delete();
+    //     return response()->json([
+    //         'status' => true,
+    //         'message' => 'User logged Out',
+    //         'data'=> [],
+    //     ], 200);
+    // }
     
 }
