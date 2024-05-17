@@ -13,6 +13,11 @@ Route::post("login",[ApiController::class,"login"]);
 //logout
 
 Route::group(["middleware" => ["auth:sanctum"]], function () {
+
+    // single Data Fetch
+    Route::get("profile", [ApiController::class,"profile"]);
+
+    // Logout
     Route::get("logout", [ApiController::class,"logout"]);
 });
 
