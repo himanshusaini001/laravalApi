@@ -13,14 +13,13 @@ Route::post("login",[ApiController::class,"login"]);
 
 //logout
 
-Route::group(["middleware" => ["auth:sanctum"]], function () {
+Route::group(["middleware" => ["auth:sanctum",'admin']], function () {
 
     // single Data Fetch
     Route::get("profile", [ApiController::class,"profile"]);
 
     // Logout
     Route::get("logout", [ApiController::class,"logout"]);
-
     // Product Data
 
     // Post Product Data
@@ -34,8 +33,8 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
 
       //Delete Product Data
       Route::get('delete_product_data/{id}', [ApiController::class, 'delete_product_data']);
-
 });
+
 
 
 

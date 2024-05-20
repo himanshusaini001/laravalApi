@@ -116,6 +116,7 @@ class ApiController extends Controller
         public function post_product(Request $request)
         {
             try{
+               
                 // products List
                 $validation = Validator::make($request->all(),[
                     'pname' => 'required|string',
