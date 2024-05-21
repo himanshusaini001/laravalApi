@@ -100,6 +100,7 @@ class ApiController extends Controller
         ], 200);
     }
     public function logout(Request $request){
+        dd($request);
         $request->user()->currentAccessToken()->delete();
         return response()->json([
             'status' => true,
@@ -166,7 +167,6 @@ class ApiController extends Controller
         $item = apiproducts::findOrFail($id);
         $item->delete();
         return response()->json(['message' => 'Item deleted successfully.'], 200);
-   
     }
     public function update_product(Request $request, $id)
     {
