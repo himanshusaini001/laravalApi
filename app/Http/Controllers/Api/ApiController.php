@@ -110,10 +110,9 @@ class ApiController extends Controller
     // Product Module
 
     // Post Product
-    public function product(Request $request)
+    public function add_product(Request $request)
     {
         try{
-            
             // products List
             $validation = Validator::make($request->all(),[
                 'pname' => 'required|string',
@@ -166,11 +165,9 @@ class ApiController extends Controller
     public function delete_product($id){
         $item = apiproducts::findOrFail($id);
         $item->delete();
-
         return response()->json(['message' => 'Item deleted successfully.'], 200);
    
     }
-
     public function update_product(Request $request, $id)
     {
         // Validate the request data
