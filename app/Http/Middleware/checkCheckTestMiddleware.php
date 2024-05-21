@@ -27,8 +27,5 @@ class checkCheckTestMiddleware
             exit;
         }
         
-           
-        
-      
     }
 }
