@@ -23,8 +23,10 @@ class checkCheckTestMiddleware
         if ($request->headers->has('custom-key') && $request->headers->get('custom-key') === $customKey) {
             return $next($request);
         } else {
-            print_r('not');
-            exit;
+            return response()->json([
+                'status' => false,
+                'message' => 'dose not exist Key',
+            ]);
         }
         
     }
