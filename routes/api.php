@@ -30,8 +30,6 @@ Route::group(["middleware" => ["auth:sanctum",'admin']], function () {
     
     //Delete Product Data
     Route::delete('delete_product/{id}', [ApiController::class, 'delete_product']);
-     
-     
 });
 
 

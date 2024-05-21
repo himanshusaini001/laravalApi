@@ -163,28 +163,6 @@ class ApiController extends Controller
     {   
         return apiproducts::where('product_id', $product_id)->first();
     }
-    // public function delete_product($id)
-    // {   
-    //     $data = apiproducts::where('id', $id)->first();
-    //     if($data)
-    //     {
-    //     $data->delete();
-    //     return response()->json([
-    //         'status' => true,
-    //         'message' => 'successfully Deleted',
-    //         'Product Id'=> $id,
-            
-    //     ], 200);
-    //     }
-    //     else{
-    //     return response()->json([
-    //         'status' => false,
-    //         'Error' => 'Dose Not Fetch Product Id',
-    //         'Product Id'=> $id,
-    //     ], 404);
-    //     }
-    // }
-
     public function delete_product($id){
         $item = apiproducts::findOrFail($id);
         $item->delete();
