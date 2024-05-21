@@ -170,4 +170,37 @@ class ApiController extends Controller
         return response()->json(['message' => 'Item deleted successfully.'], 200);
    
     }
+
+    public function update_product(Request $request, $id)
+    {
+        // Validate the request data
+        $request->validate([
+            'pname' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'required|boolean',
+        ]);
+    
+        // Find the product by ID or fail
+        $product_id = apiproducts::findOrFail($id);
+    
+        // Update the product details
+        $product_id->update([
+            'pname' => $request->pname,
+            'price' => $request->price,
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status,
+        ]);
+        
+        // Return a response, e.g., the updated product
+       
+        return response()->json([
+            'status' => true,
+            'message' => 'Update Product successfully',
+            'token' => $product_id->createToken('Api Token')->plainTextToken, // Corrected typo
+        ], 200);
+    }
+    
 }
