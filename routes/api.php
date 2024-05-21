@@ -26,15 +26,14 @@ Route::group(["middleware" => ["auth:sanctum",'admin']], function () {
     Route::post("post_product",[ApiController::class,"post_product"]);
 
     // Get All Product Data
-    Route::get('get_product_list', [ApiController::class, 'get_product_list']);
+    Route::get('product_list', [ApiController::class, 'product_list']);
     
     // Get Single Product Data
-    Route::get('get_single_data/{product_id}', [ApiController::class, 'get_single_data']);
-
+    Route::delete('delete_product/{id}', [ApiController::class, 'delete_product']);
       //Delete Product Data
-      Route::get('delete_product_data/{id}', [ApiController::class, 'delete_product_data']);
+    //  Route::get('delete_product/{id}', [ApiController::class, 'delete_product_data']);
+     
 });
-
 
 
 

@@ -54,7 +54,6 @@ class ApiController extends Controller
             ], 500);
         }
     }
-
     public function login(Request $request){
         try{
             $validation = Validator::make($request->all(),[
@@ -100,7 +99,6 @@ class ApiController extends Controller
             'id' => auth()->user()->id
         ], 200);
     }
-    
     public function logout(Request $request){
         $request->user()->currentAccessToken()->delete();
         return response()->json([
@@ -109,88 +107,89 @@ class ApiController extends Controller
             'data'=> [],
         ], 200);
     }
-
     // Product Module
 
     // Post Product
-        public function post_product(Request $request)
-        {
-            try{
-               
-                // products List
-                $validation = Validator::make($request->all(),[
-                    'pname' => 'required|string',
-                    'price' => 'required|integer',
-                    'title' => 'required|string',
-                    'description' => 'required|string',
-                    'status' => 'required|integer',
-                ]);
-        
-                // products List Validation
-                if ($validation->fails()) {
-                    return response()->json([
-                        'status' => false,
-                        'message' => 'Validation error',
-                        'errors' => $validation->errors()->all(),
-                    ], 401);
-                }
-        
-                // Insert products List 
-                $product = apiproducts::create([
-                    'pname' => $request->pname, // Corrected to match validation
-                    'price' => $request->price,
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'status' => $request->status,
-                ]);
-        
-                return response()->json([
-                    'status' => true,
-                    'message' => 'Product created successfully',
-                    'token' => $product->createToken('Api Token')->plainTextToken, // Corrected typo
-                ], 200);
-        
-            } catch (\Exception $e) {
+    public function product(Request $request)
+    {
+        try{
+            
+            // products List
+            $validation = Validator::make($request->all(),[
+                'pname' => 'required|string',
+                'price' => 'required|integer',
+                'title' => 'required|string',
+                'description' => 'required|string',
+                'status' => 'required|integer',
+            ]);
+    
+            // products List Validation
+            if ($validation->fails()) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'An error occurred',
-                    'error' => $e->getMessage(), // Corrected typo
-                ], 500);
+                    'message' => 'Validation error',
+                    'errors' => $validation->errors()->all(),
+                ], 401);
             }
-        }
-
-        public function get_product_list()
-        {
-            return apiproducts::all();
-        }
-        public function get_single_data($product_id)
-        {   
-            return apiproducts::where('product_id', $product_id)->first();
-        }
-
-
-        public function delete_product_data($id)
-        {   
-            $data = apiproducts::where('id', $id)->first();
-           if($data)
-           {
-            $data->delete();
+    
+            // Insert products List 
+            $product = apiproducts::create([
+                'pname' => $request->pname, // Corrected to match validation
+                'price' => $request->price,
+                'title' => $request->title,
+                'description' => $request->description,
+                'status' => $request->status,
+            ]);
+    
             return response()->json([
                 'status' => true,
-                'message' => 'successfully Deleted',
-                'Product Id'=> $id,
-                
+                'message' => 'Product created successfully',
+                'token' => $product->createToken('Api Token')->plainTextToken, // Corrected typo
             ], 200);
-           }
-           else{
+    
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'Error' => 'Dose Not Fetch Product Id',
-                'Product Id'=> $id,
-                
-            ], 404);
-           }
+                'message' => 'An error occurred',
+                'error' => $e->getMessage(), // Corrected typo
+            ], 500);
         }
+    }
+    public function product_list()
+    {
+        return apiproducts::all();
+    }
+    public function single_product($product_id)
+    {   
+        return apiproducts::where('product_id', $product_id)->first();
+    }
+    // public function delete_product($id)
+    // {   
+    //     $data = apiproducts::where('id', $id)->first();
+    //     if($data)
+    //     {
+    //     $data->delete();
+    //     return response()->json([
+    //         'status' => true,
+    //         'message' => 'successfully Deleted',
+    //         'Product Id'=> $id,
+            
+    //     ], 200);
+    //     }
+    //     else{
+    //     return response()->json([
+    //         'status' => false,
+    //         'Error' => 'Dose Not Fetch Product Id',
+    //         'Product Id'=> $id,
+    //     ], 404);
+    //     }
+    // }
 
-    
+    public function delete_product($id){
+        $item = apiproducts::findOrFail($id);
+        $item->delete();
+
+        return response()->json(['message' => 'Item deleted successfully.'], 200);
+   
+    }
 }
