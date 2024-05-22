@@ -36,6 +36,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'admin']], fu
     Route::delete('delete_product/{id}', [ApiController::class, 'delete_product']);
 });
 
+
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
