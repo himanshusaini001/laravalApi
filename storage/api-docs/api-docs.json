@@ -1,0 +1,28 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "User API",
+        "description": "Documentation for my RESTful API built with Laravel.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "api/user/login": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get list of users",
+                "description": "Returns list of users",
+                "operationId": "getUsersList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        }
+    }
+}

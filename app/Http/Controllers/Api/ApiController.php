@@ -10,9 +10,29 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
-
+/**
+ * @OA\Info(
+ *     title="User API",
+ *     version="1.0.0",
+ *     description="Documentation for my RESTful API built with Laravel."
+ * )
+ */
 class ApiController extends Controller
 {
+    /**
+ * @OA\Get(
+ *      path="api/user/login",
+ *      operationId="getUsersList",
+ *      tags={"Users"},
+ *      summary="Get list of users",
+ *      description="Returns list of users",
+ *      @OA\Response(
+ *          response=200,
+ *          description="Successful operation"
+ *       ),
+ *      @OA\Response(response=400, description="Bad request"),
+ * )
+ */
     public function register(Request $request)
     {
         try {
