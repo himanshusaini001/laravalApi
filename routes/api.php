@@ -5,8 +5,6 @@ use App\Http\Controllers\Api\ApiController;
 use Illuminate\Support\Facades\Route;
 use Whoops\Run;
 
-// User Route
-
 // Register
 Route::post("user/register",[ApiController::class,"register"]);
 
