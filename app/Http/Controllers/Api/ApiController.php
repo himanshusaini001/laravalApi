@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
  *     description="Documentation for my RESTful API built with Laravel."
  * )
  */
+
 class ApiController extends Controller
 {
     /**

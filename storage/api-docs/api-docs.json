@@ -9,7 +9,7 @@
         "api/user/login": {
             "get": {
                 "tags": [
-                    "Users"
+                    "s"
                 ],
                 "summary": "Get list of users",
                 "description": "Returns list of users",
