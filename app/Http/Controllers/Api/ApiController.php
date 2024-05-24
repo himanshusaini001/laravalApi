@@ -13,13 +13,15 @@ use Illuminate\Support\Facades\Validator;
 /**
  * @OA\Info(
  *     title="User API",
- *     version="1.0.2",
+ *     version="1.0.0",
  *     description="Documentation for my RESTful API built with Laravel."
  * )
  */
 
 class ApiController extends Controller
 {
+    // Register 
+
     /**
      * @OA\Post(
      *      path="/api/user/register",
@@ -48,6 +50,8 @@ class ApiController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      * )
      */
+
+
     public function register(Request $request)
     {
         try {
@@ -78,7 +82,6 @@ class ApiController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User created successfully',
-                'token' => $user->createToken('Api Token')->plainTextToken,
             ],200);
 
         } catch (\Exception $e) {
@@ -89,14 +92,16 @@ class ApiController extends Controller
             ], 500);
         }
     }
+
+    // Login 
     
-  /**
+    /**
      * @OA\Post(
      *      path="/api/user/login",
-     *      operationId="loginUser",
+     *      operationId="userLogin",
      *      tags={"Users"},
-     *      summary="Login",
-     *      description="Successfull Login user",
+     *      summary="user Login",
+     *      description=" successfull login",
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(
@@ -116,6 +121,7 @@ class ApiController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      * )
      */
+    
     public function login(Request $request){
         try{
             $validation = Validator::make($request->all(),[
@@ -152,54 +158,39 @@ class ApiController extends Controller
             ], 500);
         }
     }
-  /**
+ 
+
+    /**
  * @OA\Get(
  *      path="/api/user/profile",
- *      operationId="getUserProfile",
+ *      operationId="UserProfile",
  *      tags={"Users"},
- *      summary="Fetch User Profile",
- *      description="Endpoint to fetch user profile data.",
- *      security={{"bearerAuth": {}}},
- *      
- *     
+ *      summary="Profile",
+ *      description="Successful Fetch Profile Data",
  *      @OA\Parameter(
  *          name="Authorization",
  *          in="header",
  *          required=true,
- *          description="Bearer token for authentication",
+ *          description="Bearer token for Authorization",
  *          @OA\Schema(
  *              type="string",
- *              format="token",
- *              example="Bearer Add Token Key"
+ *              example="Bearer YourTokenHere"
  *          )
  *      ),
  *      @OA\Response(
- *          response=200,
- *          description="Successful operation",
- *          @OA\JsonContent(
- *              @OA\Property(property="id", type="integer", example=1),
- *              @OA\Property(property="name", type="string", example="John Doe"),
- *              @OA\Property(property="email", type="string", example="johndoe@example.com")
- *          )
- *      ),
- *      @OA\Response(
- *          response=400,
- *          description="Bad request - Missing or invalid parameters",
- *          @OA\JsonContent(
- *              @OA\Property(property="error", type="string", example="Invalid request. [Provide details here]")
- *          )
- *      ),
- *      @OA\Response(
- *          response=401,
- *          description="Unauthorized - Missing or invalid authentication token",
- *          @OA\JsonContent(
- *              @OA\Property(property="error", type="string", example="Unauthorized. [Provide details here]")
- *          )
- *      )
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="name", type="string", example="John Doe"),
+     *              @OA\Property(property="email", type="string", example="johndoe@example.com"),
+     *          )
+     *       ),
+     
  * )
  */
 
-    public function profile(){
+    public function profile(Request $request){
+       
         $request = auth()->user();
         return response()->json([
             'status' => true,
@@ -209,29 +200,6 @@ class ApiController extends Controller
         ], 200);
     }
     
-    // Product Module
-        /**
-         * @OA\Info(
-         *     title="Admin API",
-         *     version="1.0.0",
-         *     description="Documentation for my RESTful API built with Laravel."
-         * )
-         */
-
-    /**
-     * @OA\Post(
-     *      path="/api/user/add_product",
-     *      operationId="AddProduct",
-     *      tags={"Admin"},
-     *      summary="Add Product",
-     *      description="Admin product",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     * )
-     */
     // Post Product
     public function add_product(Request $request)
     {
@@ -278,78 +246,22 @@ class ApiController extends Controller
         }
     }
 
-     /**
-     * @OA\Get(
-     *      path="/api/user/product_list",
-     *      operationId="productList",
-     *      tags={"Admin"},
-     *      summary="Product List",
-     *      description="Admin product",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     * )
-     */
     public function product_list()
     {
         return apiproducts::all();
     }
 
-    /**
-     * @OA\Get(
-     *      path="/api/user/single_product",
-     *      operationId="singleProduct",
-     *      tags={"Admin"},
-     *      summary="Single Product",
-     *      description="Admin product",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     * )
-     */
     public function single_product($id)
     {   
         return apiproducts::where('product_id', $id)->first();
     }
 
-     /**
-     * @OA\Delete(
-     *      path="/api/user/delete_product",
-     *      operationId="DeleteProduct",
-     *      tags={"Admin"},
-     *      summary="Delete Product",
-     *      description="Admin product",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     * )
-     */
     public function delete_product($id){
         $item = apiproducts::findOrFail($id);
         $item->delete();
         return response()->json(['message' => 'Item deleted successfully.'], 200);
     }
 
-     /**
-     * @OA\Put(
-     *      path="/api/user/update_product",
-     *      operationId="update_product",
-     *      tags={"Admin"},
-     *      summary="Update Product",
-     *      description="Admin product",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     * )
-     */
     public function update_product(Request $request, $id)
     {
         // Validate the request data

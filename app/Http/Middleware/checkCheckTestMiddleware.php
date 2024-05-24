@@ -14,7 +14,9 @@ class checkCheckTestMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    {
+    { 
+      
+       // return $next($request);
         $customKey = env('NUM_KEY');
         // Retrieve the query parameters from the request
         $queryParams = $request->all();

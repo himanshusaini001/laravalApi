@@ -3,7 +3,7 @@
     "info": {
         "title": "User API",
         "description": "Documentation for my RESTful API built with Laravel.",
-        "version": "1.0.2"
+        "version": "1.0.0"
     },
     "paths": {
         "/api/user/register": {
@@ -81,9 +81,9 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "Login",
-                "description": "Successfull Login user",
-                "operationId": "loginUser",
+                "summary": "user Login",
+                "description": " successfull login",
+                "operationId": "userLogin",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -142,19 +142,18 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "Fetch User Profile",
-                "description": "Endpoint to fetch user profile data.",
-                "operationId": "getUserProfile",
+                "summary": "Profile",
+                "description": "Successful Fetch Profile Data",
+                "operationId": "UserProfile",
                 "parameters": [
                     {
                         "name": "Authorization",
                         "in": "header",
-                        "description": "Bearer token for authentication",
+                        "description": "Bearer token for Authorization",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "format": "token",
-                            "example": "Bearer Add Token Key"
+                            "example": "Bearer YourTokenHere"
                         }
                     }
                 ],
@@ -165,10 +164,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "example": 1
-                                        },
                                         "name": {
                                             "type": "string",
                                             "example": "John Doe"
@@ -182,151 +177,6 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "description": "Bad request - Missing or invalid parameters",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Invalid request. [Provide details here]"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized - Missing or invalid authentication token",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unauthorized. [Provide details here]"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/user/logout": {
-            "get": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Logout",
-                "description": "Logout a user",
-                "operationId": "LogoutUser",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    }
-                }
-            }
-        },
-        "/api/user/add_product": {
-            "post": {
-                "tags": [
-                    "Admin"
-                ],
-                "summary": "Add Product",
-                "description": "Admin product",
-                "operationId": "AddProduct",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    }
-                }
-            }
-        },
-        "/api/user/product_list": {
-            "get": {
-                "tags": [
-                    "Admin"
-                ],
-                "summary": "Product List",
-                "description": "Admin product",
-                "operationId": "productList",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    }
-                }
-            }
-        },
-        "/api/user/single_product": {
-            "get": {
-                "tags": [
-                    "Admin"
-                ],
-                "summary": "Single Product",
-                "description": "Admin product",
-                "operationId": "singleProduct",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    }
-                }
-            }
-        },
-        "/api/user/delete_product": {
-            "delete": {
-                "tags": [
-                    "Admin"
-                ],
-                "summary": "Delete Product",
-                "description": "Admin product",
-                "operationId": "DeleteProduct",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    }
-                }
-            }
-        },
-        "/api/user/update_product": {
-            "put": {
-                "tags": [
-                    "Admin"
-                ],
-                "summary": "Update Product",
-                "description": "Admin product",
-                "operationId": "update_product",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "400": {
-                        "description": "Bad request"
                     }
                 }
             }

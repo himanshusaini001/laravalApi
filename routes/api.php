@@ -11,7 +11,7 @@ Route::post("user/register",[ApiController::class,"register"]);
 // Login
 Route::post("user/login",[ApiController::class,"login"]);
 
-Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'admin']], function () {
+Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function () {
 
     // User Profile 
     Route::get("profile", [ApiController::class,"profile"]);
