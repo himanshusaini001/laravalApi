@@ -17,7 +17,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'admin']], fu
     Route::get("profile", [ApiController::class,"profile"]);
 
     // Logout
-    Route::get("logout", [ApiController::class,"logout"]);
+   // Route::get("logout", [ApiController::class,"logout"]);
 });
 
 // Product Route
@@ -28,6 +28,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'admin']], fu
 
     // Get All Product Data
     Route::get('product_list', [ApiController::class, 'product_list']);
+
+    // Get Single Product Data
+    Route::get('single_product/{id}', [ApiController::class, 'single_product']);
 
     // Update Product Data
     Route::put("update_product/{id}",[ApiController::class,"update_product"]);
